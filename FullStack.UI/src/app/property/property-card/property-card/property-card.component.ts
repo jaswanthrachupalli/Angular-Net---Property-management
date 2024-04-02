@@ -6,17 +6,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./property-card.component.css']
 })
 export class PropertyCardComponent implements OnInit {
-<<<<<<< Updated upstream
-=======
-@Input() property: any = {
-    "Id":1,
-    "name":"jaswanth",
-    "type":"house",
-    "price":12000
 
-  }
-  
->>>>>>> Stashed changes
+  @Input() property: any = {
+    "Id": 1,
+    "name": "jaswanth",
+    "type": "house",
+    "price": 12000
+  };
 
   constructor() { }
 
