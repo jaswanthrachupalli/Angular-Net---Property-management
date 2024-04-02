@@ -1,0 +1,12 @@
+.propImg{
+    height: 150px;
+
+}
+.card{
+    width: 175px;
+}
+.card-custom {
+    border: 10px solid #ddd; /* Add border with a light gray color */
+    background-color: #fff; /* Set background color to white */
+    padding: 3px; /* Add padding to move the border line to the left */
+}

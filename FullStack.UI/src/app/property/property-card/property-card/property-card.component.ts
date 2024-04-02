@@ -6,6 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./property-card.component.css']
 })
 export class PropertyCardComponent implements OnInit {
+  property: any = {
+    "Id":1,
+    "name":"jaswanth",
+    "type":"house",
+    "price":12000
+
+  }
+  
 
   constructor() { }
 
