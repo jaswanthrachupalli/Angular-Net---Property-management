@@ -1,0 +1,58 @@
+Here's a good starting point for a .gitignore file in your Angular project:
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+
+# Dependencies
+/node_modules
+
+# IDE specific (VS Code)
+.vscode/*
+!**/settings.json
+!**/tasks.json
+!**/launch.json
+!**/extensions.json
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Testing
+/e2e/*.js
+/e2e/*.map
+
+# Misc files
+.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# Secret files
+*secret.js
+
+# Build artifacts
+.build-analytics/
+/modules/rollup-test/dist/
+
+# User Specific Bazel settings
+.bazelrc.user
+
+# User Specific ng-dev settings
+.ng-dev.user*
+
+# Local history (VS Code extension)
+.history
+
+# Husky configuration
+.husky/_
+
+# Example content cache (Angular CLI)
+FullStack.UI/.angular/cache
+
+# aio content examples cache
+aio/content/examples/.DS_Store

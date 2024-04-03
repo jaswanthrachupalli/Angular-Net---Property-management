@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HousingService } from 'src/app/Services/housing.service';
+import { iproperty } from '../iproperty.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-property-list',
@@ -6,49 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./property-list.component.css']
 })
 export class PropertyListComponent implements OnInit {
-  properties: Array<any> = [
-    {
-    "Id":1,
-    "name":"jaswanth",
-    "type":"house",
-    "price":12000
-    },
-    {
-      "Id":2,
-      "name":"jas",
-      "type":"house",
-      "price":15000
-    },
-    {
-      "Id":3,
-      "name":"j",
-      "type":"house",
-      "price":25000
-    },
-    {
-      "Id":4,
-      "name":"y",
-      "type":"house",
-      "price":60000
-    },
-    {
-      "Id":5,
-      "name":"a",
-      "type":"house",
-      "price":37000
-    },
-    {
-      "Id":6,
-      "name":"b",
-      "type":"house",
-      "price":30000
-    },
+  properties: iproperty[] = [];
+  sellRent: number = 1; // Initialize to default value
 
-  ]
-
-  constructor() { }
+  constructor(private route: ActivatedRoute, private housingService: HousingService) { }
 
   ngOnInit(): void {
-  }
+    // Check if the route URL contains 'rent' segment to determine SellRent value
+    if (this.route.snapshot.url.toString().includes('rent')) {
+      this.sellRent = 2;
+    }
 
+    // Call getAllProperties with the SellRent parameter
+    this.housingService.getAllProperties(this.sellRent).subscribe(
+      (data: any[]) => {
+        this.properties = data;
+        console.log(data);
+      },
+      (error: any) => {
+        console.error('Error fetching properties:', error);
+      }
+    );
+  }
 }
