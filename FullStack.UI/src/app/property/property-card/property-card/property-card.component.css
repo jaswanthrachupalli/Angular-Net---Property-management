@@ -1,0 +1,38 @@
+
+.card:hover img {
+    transform: scale(1.2);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    opacity: 0.5;
+}
+
+.card img {
+    transform: scale(1);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+}
+
+.card-img-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%; /* Ensure the wrapper spans the entire width of the card */
+    height: 200px; /* Set the desired height of the image */
+}
+
+.card-img-wrapper img {
+    width: 100%; /* Make the image fill the entire width of its container */
+    height: 100%; /* Make the image fill the entire height of its container */
+    object-fit: cover; /* Ensure the image maintains its aspect ratio while covering the entire container */
+}
+
+
+.member-icons {
+    position: absolute; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
