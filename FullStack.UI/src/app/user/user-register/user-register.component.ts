@@ -32,4 +32,5 @@ export class UserRegisterComponent implements OnInit {
     }
     return password.value === confirmPassword.value ? null : { notmatched: true };
   }
+
 }

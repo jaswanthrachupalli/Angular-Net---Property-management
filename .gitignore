@@ -6,7 +6,7 @@ Here's a good starting point for a .gitignore file in your Angular project:
 /out-tsc
 
 # Dependencies
-/node_modules
+FullStack.UI/node_modules
 
 # IDE specific (VS Code)
 .vscode/*
