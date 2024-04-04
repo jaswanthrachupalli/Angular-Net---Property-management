@@ -18,21 +18,39 @@
             <label for="email" class="form-label">Email</label>
             <input type="text" class="form-control" formControlName="email">
             <span *ngIf="!registerationForm.get('email')?.valid && registerationForm.get('email')?.touched" class="error-block">
-              <span *ngIf="registerationForm.get('email').hasError('required');">
-
-              Please provide a valid email
-            </span>
+              <span *ngIf="registerationForm.get('email')?.hasError('required');">
+                Please provide an email
+              </span>
             </span>
           </div>
 
           <div class="form-group col-12">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" formControlName="password">
+            <span *ngIf="!registerationForm.get('password')?.valid && registerationForm.get('password')?.touched" class="error-block">
+              <span *ngIf="registerationForm.get('password')?.hasError('required');">
+                Please provide a password
+              </span>
+              <span *ngIf="registerationForm.get('password')?.hasError('minlength');">
+                Password must be at least 8 characters long
+              </span>
+            </span>
           </div>
 
           <div class="form-group col-12">
             <label for="cpassword" class="form-label">Confirm Password</label>
             <input type="password" class="form-control" formControlName="confirmPassword">
+            <span *ngIf="!registerationForm.get('confirmPassword')?.valid && registerationForm.get('confirmPassword')?.touched" class="error-block">
+              <span *ngIf="registerationForm.get('confirmPassword')?.hasError('required');">
+                Please confirm your password
+              </span>
+              <span *ngIf="registerationForm.get('confirmPassword')?.hasError('minlength');">
+                Confirm password must be at least 8 characters long
+              </span>
+              <span *ngIf="registerationForm.get('confirmPassword')?.hasError('notmatched');">
+                Passwords do not match
+              </span>
+            </span>
           </div>
 
           <div class="form-group col-12">
