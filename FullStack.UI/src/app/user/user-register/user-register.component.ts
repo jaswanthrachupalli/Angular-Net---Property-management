@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { UserServiceService } from 'src/app/Services/user-service.service';
 import { User } from 'src/app/model/user';
+import { AlertifyService } from 'src/app/Services/alertify.service';
 
 @Component({
   selector: 'app-user-register',
@@ -13,7 +14,7 @@ export class UserRegisterComponent implements OnInit {
   user: any = {};
   userSubmitted?: boolean;
 
-  constructor(private fb: FormBuilder, private userservice: UserServiceService) {
+  constructor(private fb: FormBuilder, private userservice: UserServiceService, private alertify: AlertifyService) {
     this.registerationForm = this.fb.group({
       userName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -46,6 +47,11 @@ export class UserRegisterComponent implements OnInit {
     this.userservice.adduser(this.user);
     this.registerationForm.reset();
     this.userSubmitted = false;
+    this.alertify.success('Registration Successful');
+  } else{
+    this.alertify.error('Registration Failed');
+    this.userSubmitted = false;
+    return;
   }
 }
 }
