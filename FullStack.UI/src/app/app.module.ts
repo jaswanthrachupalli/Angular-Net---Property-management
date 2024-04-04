@@ -16,8 +16,8 @@ import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { UserServiceService } from './Services/user-service.service';
 import { AlertifyService } from './Services/alertify.service';
-
-
+import { AuthService } from './Services/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 const appRoutes: Routes = [
   {path: '', component: PropertyListComponent},
   {path: 'user-login', component: UserLoginComponent},
@@ -46,10 +46,13 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    
+
 
   ],
-  providers: [HousingService, UserServiceService, AlertifyService],
+  providers: [HousingService, UserServiceService, AlertifyService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
