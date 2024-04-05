@@ -8,14 +8,7 @@ import { iproperty } from '../../iproperty.interface';
 })
 export class PropertyCardComponent implements OnInit {
 
-  @Input() property: iproperty = {
-    "Id": 1,
-    "name": "jaswanth",
-    "type": "house",
-    "price": 12000,
-    "SellRent": 1
-  };
-
+  @Input() property!: iproperty;
   constructor() { }
 
   ngOnInit(): void {

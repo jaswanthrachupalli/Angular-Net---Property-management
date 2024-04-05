@@ -24,10 +24,10 @@
             <li *ngIf="!loggedin()" class="nav-item">
               <a class="nav-link" routerLink="user-login" routerLinkActive="active">Login</a>
             </li>
-            <li *ngIf="!loggedin()" class="nav-item">
+            <li *ngIf="loggedin()" class="nav-item">
               <a class="nav-link" (click)="onLogout()">Logout</a>
             </li>
-            <div *ngIf="loggedin()" class="dropdeon mr-5" dropdown>
+            <div *ngIf="loggedin()" class="dropdown mr-5" dropdown>
               <a href="#" class="dropdown-toggle text-light" dropdownToggle (click)="false">
               Welcome {{loggedinuser }}</a>
               <div class="dropdown-menu" *dropdownMenu> 

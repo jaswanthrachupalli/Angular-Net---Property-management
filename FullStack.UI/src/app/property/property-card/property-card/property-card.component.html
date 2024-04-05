@@ -1,6 +1,8 @@
 <div class="card">
     <div class="card-img-wrapper">   
-        <img class="propImg" src="assets/images/{{property.images}}.jpeg">
+        <div *ngFor="let image of property.image">
+            <img class="propImg" [src]="'assets/images/' + property.image + '.jpeg'">
+        </div>
         <ul class="list-inline text-center member-icons">
             <li class="list-inline-item">
                 <button class="btn btn-primary" routerLink="/property-detail/{{property.Id}}">E</button>

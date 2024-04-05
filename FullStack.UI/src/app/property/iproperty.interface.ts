@@ -4,6 +4,6 @@ export interface iproperty {
     name: string;
     type: string;
     price: number;
-    images?: string;
+    image: string[];
     
 }
