@@ -1,4 +1,4 @@
-export interface iproperty {
+export interface ipropertybase {
     Id: number | null;
     SellRent: number | null;
     name: string | null;

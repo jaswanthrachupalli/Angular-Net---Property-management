@@ -18,6 +18,13 @@ import { UserServiceService } from './Services/user-service.service';
 import { AlertifyService } from './Services/alertify.service';
 import { AuthService } from './Services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+
+
+
 const appRoutes: Routes = [
   {path: '', component: PropertyListComponent},
   {path: 'user-login', component: UserLoginComponent},
@@ -38,7 +45,7 @@ const appRoutes: Routes = [
     AddPropertyComponent,
     PropertyDetailComponent,
     UserLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,11 +54,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ReactiveFormsModule,
+    TabsModule.forRoot(),
+    BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
-    
-
-
+    ButtonsModule.forRoot()
+    ,BsDatepickerModule.forRoot()
   ],
+
   providers: [HousingService, UserServiceService, AlertifyService,AuthService],
   bootstrap: [AppComponent]
 })
