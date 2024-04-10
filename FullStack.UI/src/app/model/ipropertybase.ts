@@ -8,7 +8,7 @@ export interface ipropertybase {
     BHK: number | null;
     BuiltArea: number | null;
     City: string | null;
-    RTM: number | null;
+    RTM: boolean | null;
     image: [];
   }
   
