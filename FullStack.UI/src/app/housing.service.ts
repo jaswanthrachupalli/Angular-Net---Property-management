@@ -18,32 +18,32 @@ export class HousingService {
   }
 
 
-  getAllProperties(SellRent: number): Observable<Object> {
-    return this.http.get('data/properties.json').pipe(
-      map((data: any) => { // Explicitly define the type of data as 'any'
-        const propertiesArray: Array<ipropertybase> = [];
-        const localProperties = JSON.parse(localStorage.getItem('newProp') as string); // Type assertion
-
-        if (localProperties) {
+  getAllProperties(SellRent?: number): Observable<property[]> {
+    return this.http.get<any>('data/properties.json').pipe(
+      map(data => {
+        const propertiesArray: Array<property> = [];
+        const localPropertiesString = localStorage.getItem('newProp');
+        if (localPropertiesString) {
+          const localProperties = JSON.parse(localPropertiesString);
           for (const id in localProperties) {
-            if (localProperties.hasOwnProperty(id) && localProperties[id].SellRent === SellRent) {
+            if (!SellRent || localProperties[id].SellRent === SellRent) {
               propertiesArray.push(localProperties[id]);
             }
           }
         }
-
-
         for (const id in data) {
-          if (data.hasOwnProperty(id) && data[id].SellRent === SellRent) {
+          if (!SellRent || data[id].SellRent === SellRent) {
             propertiesArray.push(data[id]);
           }
         }
         return propertiesArray;
       })
     );
-  }
+    }
+
 
   addProperty(property: property) {
+  try{
     let newProp = [property];
     const existingPropString = localStorage.getItem('newProp');
   if (existingPropString !== null) {
@@ -55,7 +55,11 @@ export class HousingService {
 
   // Store the updated properties array in local storage
   localStorage.setItem('newProp', JSON.stringify(newProp));
+  console.log('Property saved successfully');
+} catch (error) {
+  console.error('Error saving property:', error);
 }
+  }
 
   newPropID() {
     const currentPID = localStorage.getItem('PID');

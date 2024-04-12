@@ -5,27 +5,21 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-constructor() { }
-authUser(user: any) {
-  let userArray = [];
-  const storedUsers = localStorage.getItem('user');
+  constructor() { }
 
-  if (storedUsers) {
-    try {
-      userArray = JSON.parse(storedUsers);
-    } catch (error) {
-      console.error('Error parsing user data from localStorage:', error);
+  authUser(user: { username: string, password: string }) {
+    let userArray: { username: string, password: string }[] = [];
+    const storedUsers = localStorage.getItem('users');
+
+    if (storedUsers) {
+      try {
+        userArray = JSON.parse(storedUsers);
+      } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+        return null;
+      }
     }
+
+    return userArray.find(u => u.username === user.username && u.password === user.password);
   }
-
-  // Ensure that userArray contains valid user objects before attempting to find a user
-  if (Array.isArray(userArray)) {
-    return userArray.find(p => p.username === user.username && p.password === user.password);
-  } else {
-    return null; // or handle the case where userArray is not an array
-  }
-}
-
-
-
 }

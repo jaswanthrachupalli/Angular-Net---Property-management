@@ -191,23 +191,37 @@ export class AddPropertyComponent implements OnInit {
   onSubmit() {
     this.nextClicked = true;
     if (this.allTabsValid()) {
+      console.log('Submit button clicked');
       this.mapProperty();
+      console.log('Mapped Property:', this.property);
+  
+      // Log individual properties
+      console.log('SellRent:', this.property.SellRent);
+      console.log('BHK:', this.property.BHK);
+      console.log('PType:', this.property.PType);
+      console.log('name:', this.property.name);
+      console.log('City:', this.property.City);
+      // Add similar log statements for other properties
+  
       this.housingService.addProperty(this.property);
+      console.log('Property saved to local storage');
       this.alertify.success('Congrats, your property listed successfully on our website');
       console.log(this.addPropertyForm);
-
+  
       if(this.SellRent.value === '2') {
         this.router.navigate(['/rent-property']);
       } else {
         this.router.navigate(['/']);
       }
-
+  
     } else {
       this.alertify.error('Please review the form and provide all valid entries');
     }
   }
+  
 
   mapProperty(): void {
+    this.property = new property();
     this.property.Id = this.housingService.newPropID();
     this.property.SellRent = +this.SellRent.value;
     this.property.BHK = this.BHK.value;
@@ -231,7 +245,11 @@ export class AddPropertyComponent implements OnInit {
     this.property.Possession = this.PossessionOn.value;
     this.property.Description = this.Description.value;
     this.property.PostedOn = new Date().toString();
-  }
+}
+
+
+ 
+
 
   allTabsValid(): boolean {
     if (this.BasicInfo.invalid) {

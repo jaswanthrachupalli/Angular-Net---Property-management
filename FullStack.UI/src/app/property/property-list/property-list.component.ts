@@ -15,7 +15,7 @@ export class PropertyListComponent implements OnInit {
 
   ngOnInit(): void {
     // Check if the route URL contains 'rent' segment to determine SellRent value
-    if (this.route.snapshot.url.toString().includes('rent')) {
+    if (this.route.snapshot.url.toString()) {
       this.sellRent = 2;
     }
 
