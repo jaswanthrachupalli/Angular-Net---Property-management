@@ -23,7 +23,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { Observable } from 'rxjs';
-
+import { FilterPipe } from 'src/app/Pipes/filter.pipe';
+import { SortPipe } from 'src/app/Pipes/sort.pipe';
 
 
 const appRoutes: Routes = [
@@ -47,6 +48,8 @@ const appRoutes: Routes = [
     PropertyDetailComponent,
     UserLoginComponent,
     UserRegisterComponent,
+    FilterPipe,
+    SortPipe
   ],
   imports: [
     BrowserModule,

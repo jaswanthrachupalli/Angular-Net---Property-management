@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HousingService } from 'src/app/Services/housing.service';
 import { iproperty } from 'src/app/model/iproperty';
 import { ActivatedRoute } from '@angular/router';
+import { property } from 'src/app/model/property';
 @Component({
   selector: 'app-property-list',
   templateUrl: './property-list.component.html',
@@ -10,6 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 export class PropertyListComponent implements OnInit {
   properties: iproperty[] = [];
   sellRent: number = 1; // Initialize to default value
+  Today = new Date();
+  City = '';
+  SearchCity = '';
+  SortbyParam = '';
+  SortDirection = 'asc';
 
   constructor(private route: ActivatedRoute, private housingService: HousingService) { }
 
@@ -21,7 +27,7 @@ export class PropertyListComponent implements OnInit {
 
     // Call getAllProperties with the SellRent parameter
     this.housingService.getAllProperties(this.sellRent).subscribe(
-      (data: any[]) => {
+      (data: any) => {
         this.properties = data;
         console.log(data);
       },
@@ -30,4 +36,22 @@ export class PropertyListComponent implements OnInit {
       }
     );
   }
+
+  onCityFilter() {
+    this.SearchCity = this.City;
+  }
+
+  onCityFilterClear() {
+    this.SearchCity = '';
+    this.City = '';
+  }
+
+  onSortDirection() {
+    if (this.SortDirection === 'desc') {
+      this.SortDirection = 'asc';
+    } else {
+      this.SortDirection = 'desc';
+    }
+  }
+
 }
