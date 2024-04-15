@@ -56,3 +56,7 @@ FullStack.UI/.angular/cache
 
 # aio content examples cache
 aio/content/examples/.DS_Store
+
+
+WebAPI/bin
+WebAPI/obj
