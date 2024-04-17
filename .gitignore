@@ -60,3 +60,33 @@ aio/content/examples/.DS_Store
 
 WebAPI/bin
 WebAPI/obj
+
+# Build artifacts
+**/bin/
+**/obj/
+
+# Temporary IDE user files
+**/.vs/
+!*.sln # Optional: Include solution file if needed
+!*.proj # Optional: Include project file if needed
+
+# Test results and coverage reports
+**/TestResults/
+**/coverage/
+
+# NuGet packages folder
+**/packages/
+
+# Secret configuration files
+**/appsettings*.json
+
+# Editor-specific temporary files
+# Adjust these based on your IDE
+!.vscode/
+!.*.sln.iml  # JetBrains Rider
+
+# User-specific cache files
+**/.user/
+
+# Ignore local secret stores
+**/Secrets/*
