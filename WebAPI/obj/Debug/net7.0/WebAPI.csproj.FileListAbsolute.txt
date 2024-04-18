@@ -29,3 +29,5 @@
 /Users/rachupallijaswanth/Desktop/second-project/Angular-Net-Property-management/WebAPI/obj/Debug/net7.0/WebAPI.pdb
 /Users/rachupallijaswanth/Desktop/second-project/Angular-Net-Property-management/WebAPI/obj/Debug/net7.0/WebAPI.genruntimeconfig.cache
 /Users/rachupallijaswanth/Desktop/second-project/Angular-Net-Property-management/WebAPI/obj/Debug/net7.0/ref/WebAPI.dll
+/Users/rachupallijaswanth/Desktop/second-project/Angular-Net-Property-management/WebAPI/bin/Debug/net7.0/package-lock.json
+/Users/rachupallijaswanth/Desktop/second-project/Angular-Net-Property-management/WebAPI/bin/Debug/net7.0/package.json
