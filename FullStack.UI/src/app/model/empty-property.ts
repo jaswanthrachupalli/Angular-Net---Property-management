@@ -1,6 +1,3 @@
-import { property } from './property.interface';
-
-
 export interface property {
     Id: string | number; // Assuming it can be either
     image: string[]; // Assuming it's an array of strings (image URLs?)
