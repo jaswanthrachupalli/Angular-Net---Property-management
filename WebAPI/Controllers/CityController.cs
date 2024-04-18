@@ -8,15 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class CityController : ControllerBase
+    [Route("api/[controller]")]
+    public class cityController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<string> Get()
+
+        public IEnumerable<string> Getstrings()
         {
-            return new string[] { "Atlanta", "New York" };
+            return new string[] { "Atlanta", "New York", "Chicago", "Boston" };
         }
     }
+
 }
 

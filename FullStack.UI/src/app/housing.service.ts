@@ -12,6 +12,11 @@ export class HousingService {
 
   constructor(private http: HttpClient) { }
 
+
+  getAllCities(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:5045/api/city');
+  }
+
   getProperty(propertyId: number): Observable<property> {
     return this.http.get<property>(`URL_to_fetch_property/${propertyId}`);
     // Replace 'URL_to_fetch_property' with the actual URL to fetch the property details
