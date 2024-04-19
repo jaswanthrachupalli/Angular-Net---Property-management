@@ -22,7 +22,7 @@ export class AddPropertyComponent implements OnInit {
   property = new property();
   propertyType: Array<string> = ['House','Apartment', 'Duplex']
   furnishType: Array<string> = ['Fully','Semi', 'Unfurnished']
-  cityList: string[] = [];
+  cityList: any[] = [];
 
   propertyView: ipropertybase = {
     Id: null,
