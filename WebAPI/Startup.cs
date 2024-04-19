@@ -1,10 +1,21 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebAPI.Data;
 
 public class Startup
 {
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+
     public void ConfigureServices(IServiceCollection services)
     {
         // Add CORS services
@@ -18,6 +29,9 @@ public class Startup
                            .AllowAnyHeader();
                 });
         });
+
+        services.AddDbContext<DataContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
         // Add other services...
         services.AddControllersWithViews();
