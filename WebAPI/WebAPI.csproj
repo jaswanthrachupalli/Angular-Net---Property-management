@@ -11,11 +11,13 @@
     <None Remove="Data\" />
     <None Remove="Data\Repo\" />
     <None Remove="interfaces\" />
+    <None Remove="Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Data\Repo\" />
     <Folder Include="interfaces\" />
+    <Folder Include="Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.18" />
