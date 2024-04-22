@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
+<<<<<<< HEAD
+using WebAPI.Data.Repo;
+=======
+>>>>>>> dev
 using WebAPI.Models;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebAPI.Controllers
 {
@@ -15,16 +18,37 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class cityController : ControllerBase
     {
-        private readonly DataContext dc;
+        private readonly ICityRepository repo;
 
-        public  cityController(DataContext dc)
+        public cityController( ICityRepository repo)
         {
-            this.dc = dc;
+            this.repo = repo;
         }
         [HttpGet]
 
         public async Task<IActionResult> GetCities()
         {
+<<<<<<< HEAD
+            var cities = await repo.GetCitiesAsync();
+            return Ok(cities);
+        }
+
+        [HttpPost("post")]
+        public async Task<IActionResult> AddCity(City city)
+        {
+            repo.AddCity(city);
+            await repo.SaveAsync();
+            return StatusCode(201);
+        }
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteCity(int id)
+        {
+            repo.DeleteCity(id);
+            await repo.SaveAsync();
+            return Ok(id);
+        }
+
+=======
             var cities = await dc.Cities.ToListAsync();
             return Ok(cities);
         }
@@ -65,6 +89,7 @@ namespace WebAPI.Controllers
             await dc.SaveChangesAsync();
             return Ok(id);
         }
+>>>>>>> dev
     }
 
 }
