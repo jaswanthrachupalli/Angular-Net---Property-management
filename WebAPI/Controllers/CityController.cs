@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WebAPI.Data;
-<<<<<<< HEAD
-using WebAPI.Data.Repo;
-=======
->>>>>>> dev
+﻿using Microsoft.AspNetCore.Mvc;
+using WebAPI.interfaces;
 using WebAPI.Models;
-
 
 namespace WebAPI.Controllers
 {
@@ -18,78 +8,35 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class cityController : ControllerBase
     {
-        private readonly ICityRepository repo;
+        private readonly IUnitOfWork uow;
 
-        public cityController( ICityRepository repo)
+        public cityController( IUnitOfWork uow)
         {
-            this.repo = repo;
+            this.uow = uow;
         }
         [HttpGet]
 
         public async Task<IActionResult> GetCities()
         {
-<<<<<<< HEAD
-            var cities = await repo.GetCitiesAsync();
+            var cities = await uow.cityRepository.GetCitiesAsync();
             return Ok(cities);
         }
 
         [HttpPost("post")]
         public async Task<IActionResult> AddCity(City city)
         {
-            repo.AddCity(city);
-            await repo.SaveAsync();
+            uow.cityRepository.AddCity(city);
+            await uow.SaveAsync();
             return StatusCode(201);
         }
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteCity(int id)
         {
-            repo.DeleteCity(id);
-            await repo.SaveAsync();
+            uow.cityRepository.DeleteCity(id);
+            await uow.SaveAsync();
             return Ok(id);
         }
 
-=======
-            var cities = await dc.Cities.ToListAsync();
-            return Ok(cities);
-        }
-
-        [HttpPost("add")]
-        [HttpPost("add/{cityname}")]
-
-        //
-        public async Task<IActionResult> AddCity(string cityName)
-
-        {
-            City city = new City();
-            city.Name = cityName;
-            await dc.Cities.AddAsync(city);
-            await dc.SaveChangesAsync();
-            return Ok(city);
-        }
-
-        [HttpPost("post")]
-
-
-        public async Task<IActionResult> AddCity(City city)
-
-        {
-            //City city = new City();
-            //city.Name = cityName;
-            await dc.Cities.AddAsync(city);
-            await dc.SaveChangesAsync();
-            return Ok(city);
-        }
-
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteCity(int id)
-
-        {
-            var city = await dc.Cities.FindAsync(id);
-            dc.Cities.Remove(city);
-            await dc.SaveChangesAsync();
-            return Ok(id);
-        }
->>>>>>> dev
     }
 
 }

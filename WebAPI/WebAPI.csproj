@@ -10,10 +10,12 @@
   <ItemGroup>
     <None Remove="Data\" />
     <None Remove="Data\Repo\" />
+    <None Remove="interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Data\Repo\" />
+    <Folder Include="interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.18" />

@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
 using WebAPI.Data.Repo;
+using WebAPI.interfaces;
 
 public class Startup
 {
@@ -21,7 +17,7 @@ public class Startup
     {
         // Add CORS services
 
-        services.AddScoped<ICityRepository, CityRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddCors(options =>
         {
             options.AddPolicy("AllowAll",
