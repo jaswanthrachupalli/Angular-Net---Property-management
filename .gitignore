@@ -5,6 +5,7 @@ Here's a good starting point for a .gitignore file in your Angular project:
 /tmp
 /out-tsc
 
+
 # Dependencies
 FullStack.UI/node_modules
 
@@ -58,8 +59,12 @@ FullStack.UI/.angular/cache
 aio/content/examples/.DS_Store
 
 
-WebAPI/bin
-WebAPI/obj
+WebAPI/bin/
+WebAPI/obj/
+
+bin/
+obj/
+
 
 
 # Build artifacts

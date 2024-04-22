@@ -12,6 +12,11 @@ tarballs/
 test-results/
 
 # Mac bundle stuff
+[Bb]in/
+[Oo]bj/
+*.dll
+*.pdb
+
 *.dmg
 *.app
 *.dll
@@ -26,8 +31,6 @@ test-results/
 # Icon must end with two \r
 Icon
 
-WebAPI/obj
-WebAPI/bin
 # Thumbnails
 ._*
 
@@ -79,6 +82,7 @@ $RECYCLE.BIN/
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
+*.rsuser
 *.suo
 *.user
 *.userosscache
@@ -94,6 +98,7 @@ $RECYCLE.BIN/
 [Rr]eleases/
 x64/
 x86/
+build/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -119,7 +124,8 @@ TestResult.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
-
+WebAPI/obj/
+WebAPI/bin/
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
 
