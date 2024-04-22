@@ -2,6 +2,8 @@
 using WebAPI.Data;
 using WebAPI.Data.Repo;
 using WebAPI.interfaces;
+using AutoMapper;
+using WebAPI.Helpers;
 
 public class Startup
 {
@@ -16,6 +18,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // Add CORS services
+
+        services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddCors(options =>
