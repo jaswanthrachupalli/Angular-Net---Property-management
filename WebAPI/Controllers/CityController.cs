@@ -36,7 +36,6 @@ namespace WebAPI.Controllers
             await repo.SaveAsync();
             return StatusCode(201);
         }
-
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteCity(int id)
         {
@@ -44,6 +43,7 @@ namespace WebAPI.Controllers
             await repo.SaveAsync();
             return Ok(id);
         }
+
     }
 
 }
