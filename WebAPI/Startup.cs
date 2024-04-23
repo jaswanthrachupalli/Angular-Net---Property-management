@@ -37,7 +37,7 @@ public class Startup
         options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
         // Add other services...
-        services.AddControllersWithViews();
+        services.AddControllersWithViews().AddNewtonsoftJson();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
