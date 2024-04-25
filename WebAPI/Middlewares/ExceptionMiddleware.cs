@@ -15,7 +15,9 @@ namespace WebAPI.Middlewares
         private readonly ILogger<ExceptionMiddleware> logger;
         private readonly IHostEnvironment env;
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
+        public ExceptionMiddleware(RequestDelegate next,
+                                    ILogger<ExceptionMiddleware> logger,
+                                    IHostEnvironment env)
         {
             this.env = env;
             this.next = next;
@@ -30,32 +32,36 @@ namespace WebAPI.Middlewares
             }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(context, ex);
+                ApiError response;
+                HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
+                String message;
+                var exceptionType = ex.GetType();
+
+                if (exceptionType == typeof(UnauthorizedAccessException))
+                {
+                    statusCode = HttpStatusCode.Forbidden;
+                    message = "You are not authorized";
+                }
+                else
+                {
+                    statusCode = HttpStatusCode.InternalServerError;
+                    message = "Some unknown error occoured";
+                }
+
+                if (env.IsDevelopment())
+                {
+                    response = new ApiError((int)statusCode, ex.Message, ex.StackTrace.ToString());
+                }
+                else
+                {
+                    response = new ApiError((int)statusCode, message);
+                }
+
+                logger.LogError(ex, ex.Message);
+                context.Response.StatusCode = (int)statusCode;
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(response.ToString());
             }
-        }
-
-        private async Task HandleExceptionAsync(HttpContext context, Exception ex)
-        {
-            var (statusCode, message) = DetermineStatusCodeAndMessage(ex);
-            var response = env.IsDevelopment()
-                ? new ApiError((int)statusCode, ex.Message, ex.StackTrace)
-                : new ApiError((int)statusCode, message);
-
-            logger.LogError(ex, "An error occurred processing your request.");
-            context.Response.StatusCode = (int)statusCode;
-            context.Response.ContentType = "application/json";
-            var jsonResponse = JsonSerializer.Serialize(response);
-            await context.Response.WriteAsync(jsonResponse);
-        }
-
-        private (HttpStatusCode, string) DetermineStatusCodeAndMessage(Exception ex)
-        {
-            return ex switch
-            {
-                UnauthorizedAccessException _ => (HttpStatusCode.Forbidden, "You are not authorized"),
-                // Add more specific exceptions here
-                _ => (HttpStatusCode.InternalServerError, "An unknown error occurred")
-            };
         }
     }
 }
