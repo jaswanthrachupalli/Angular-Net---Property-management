@@ -13,6 +13,9 @@
     <None Remove="interfaces\" />
     <None Remove="Dtos\" />
     <None Remove="Helpers\" />
+    <None Remove="Extensions\" />
+    <None Remove="Middlewares\" />
+    <None Remove="Errors\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -20,6 +23,9 @@
     <Folder Include="interfaces\" />
     <Folder Include="Dtos\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Middlewares\" />
+    <Folder Include="Errors\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.18" />
