@@ -4,6 +4,9 @@ using WebAPI.Data.Repo;
 using WebAPI.interfaces;
 using AutoMapper;
 using WebAPI.Helpers;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using WebAPI.Extensions;
 
 public class Startup
 {
@@ -42,15 +45,12 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
-        else
-        {
-            app.UseExceptionHandler("/Home/Error");
-            app.UseHsts();
-        }
+
+        app.ConfigureExceptionHandler(env);
+        app.UseHsts();
+
+        
+
 
         // Enable CORS
         app.UseCors("AllowAll");
@@ -64,9 +64,8 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            endpoints.MapControllers();
+               
         });
     }
 }
