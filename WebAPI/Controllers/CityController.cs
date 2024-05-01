@@ -5,9 +5,11 @@ using WebAPI.interfaces;
 using WebAPI.Models;
 using System;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class cityController : ControllerBase
@@ -22,10 +24,9 @@ namespace WebAPI.Controllers
             this.mapper = mapper;
         }
         [HttpGet]
-
+         [AllowAnonymous]
         public async Task<IActionResult> GetCities()
         {
-            throw new UnauthorizedAccessException();
             var cities = await uow.cityRepository.GetCitiesAsync();
             var citiesDto = mapper.Map<IEnumerable<CityDto>>(cities);
             return Ok(citiesDto);

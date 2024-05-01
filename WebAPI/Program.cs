@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
 using WebAPI.Helpers;
 using WebAPI.interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +17,22 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+var secretKey = builder.Configuration.GetSection("AppSettings:Key").Value;
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opt => {
+        opt.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            IssuerSigningKey = key
+        };
+    });
 var app = builder.Build();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -45,6 +64,7 @@ app.UseStaticFiles();
 app.UseCors(m => m.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
