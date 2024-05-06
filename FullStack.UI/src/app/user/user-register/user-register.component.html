@@ -2,24 +2,27 @@
   <div class="col-6 m-auto">
     <div class="card m-auto">
       <div class="card-header">
-        Register
+        <h3>Register</h3>
       </div>
       <div class="card-body">
-        <form *ngIf="registerationForm" [formGroup]="registerationForm" (ngSubmit)="onSubmit()">
+        <form *ngIf="registrationForm" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
           <div class="form-group col-12">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" formControlName="userName">
-            <span *ngIf="!registerationForm.get('userName')?.valid && registerationForm.get('userName')?.touched" class="error-block">
+            <span *ngIf="!registrationForm.get('userName')?.valid && registrationForm.get('userName')?.touched" class="error-block">
               Please provide a valid name
             </span>
           </div>
 
           <div class="form-group col-12">
             <label for="email" class="form-label">Email</label>
-            <input type="text" class="form-control" formControlName="email">
-            <span *ngIf="!registerationForm.get('email')?.valid && registerationForm.get('email')?.touched" class="error-block">
-              <span *ngIf="registerationForm.get('email')?.hasError('required');">
+            <input type="email" class="form-control" formControlName="email">
+            <span *ngIf="!registrationForm.get('email')?.valid && registrationForm.get('email')?.touched" class="error-block">
+              <span *ngIf="registrationForm.get('email')?.hasError('required')">
                 Please provide an email
+              </span>
+              <span *ngIf="registrationForm.get('email')?.hasError('email')">
+                Please provide a valid email
               </span>
             </span>
           </div>
@@ -27,11 +30,11 @@
           <div class="form-group col-12">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" formControlName="password">
-            <span *ngIf="!registerationForm.get('password')?.valid && registerationForm.get('password')?.touched" class="error-block">
-              <span *ngIf="registerationForm.get('password')?.hasError('required');">
+            <span *ngIf="!registrationForm.get('password')?.valid && registrationForm.get('password')?.touched" class="error-block">
+              <span *ngIf="registrationForm.get('password')?.hasError('required')">
                 Please provide a password
               </span>
-              <span *ngIf="registerationForm.get('password')?.hasError('minlength');">
+              <span *ngIf="registrationForm.get('password')?.hasError('minlength')">
                 Password must be at least 8 characters long
               </span>
             </span>
@@ -40,14 +43,11 @@
           <div class="form-group col-12">
             <label for="cpassword" class="form-label">Confirm Password</label>
             <input type="password" class="form-control" formControlName="confirmPassword">
-            <span *ngIf="!registerationForm.get('confirmPassword')?.valid && registerationForm.get('confirmPassword')?.touched" class="error-block">
-              <span *ngIf="registerationForm.get('confirmPassword')?.hasError('required');">
+            <span *ngIf="!registrationForm.get('confirmPassword')?.valid && registrationForm.get('confirmPassword')?.touched" class="error-block">
+              <span *ngIf="registrationForm.get('confirmPassword')?.hasError('required')">
                 Please confirm your password
               </span>
-              <span *ngIf="registerationForm.get('confirmPassword')?.hasError('minlength');">
-                Confirm password must be at least 8 characters long
-              </span>
-              <span *ngIf="registerationForm.get('confirmPassword')?.hasError('notmatched');">
+              <span *ngIf="registrationForm.get('confirmPassword')?.hasError('notmatched')">
                 Passwords do not match
               </span>
             </span>
@@ -56,6 +56,14 @@
           <div class="form-group col-12">
             <label for="mobile" class="form-label">Mobile</label>
             <input type="text" class="form-control" formControlName="mobile">
+            <span *ngIf="!registrationForm.get('mobile')?.valid && registrationForm.get('mobile')?.touched" class="error-block">
+              <span *ngIf="registrationForm.get('mobile')?.hasError('required')">
+                Please provide a mobile number
+              </span>
+              <span *ngIf="registrationForm.get('mobile')?.hasError('maxlength')">
+                Mobile number must not exceed 10 digits
+              </span>
+            </span>
           </div>
 
           <div class="form-group col-12">
@@ -63,10 +71,7 @@
             <button type="reset" class="btn btn-secondary ml-2">Cancel</button>
           </div>
 
-          <div>
-            Form values: {{ registerationForm.value | json }} <br/>
-            Form status: {{ registerationForm.valid }}
-          </div>
+          
         </form>
       </div>
     </div>
