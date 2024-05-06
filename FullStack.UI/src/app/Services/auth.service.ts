@@ -1,25 +1,36 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {environment} from '../../environments/environment';
+import { UserForLogin, UserForRegister } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  baseUrl = environment.baseUrl;
 
-  authUser(user: { username: string, password: string }) {
-    let userArray: { username: string, password: string }[] = [];
-    const storedUsers = localStorage.getItem('users');
+  constructor(private http: HttpClient) { }
 
-    if (storedUsers) {
-      try {
-        userArray = JSON.parse(storedUsers);
-      } catch (error) {
-        console.error('Error parsing user data from localStorage:', error);
-        return null;
-      }
-    }
+  authUser(user: UserForLogin) {
+    return this.http.post(this.baseUrl + '/account/login', user);
+    
 
-    return userArray.find(u => u.username === user.username && u.password === user.password);
-  }
+  //   let userArray: { username: string, password: string }[] = [];
+  //   const storedUsers = localStorage.getItem('users');
+
+  //   if (storedUsers) {
+  //     try {
+  //       userArray = JSON.parse(storedUsers);
+  //     } catch (error) {
+  //       console.error('Error parsing user data from localStorage:', error);
+  //       return null;
+  //     }
+  //   }
+
+  //   return userArray.find(u => u.username === user.username && u.password === user.password);
+   }
+   registerUser(user: UserForRegister) {
+    return this.http.post(this.baseUrl + '/account/register', user);
+}
 }
