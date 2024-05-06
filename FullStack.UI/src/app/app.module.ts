@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { PropertyCardComponent } from './property/property-card/property-card/property-card.component';
 import { PropertyListComponent } from './property/property-list/property-list.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HousingService } from './Services/housing.service';
 import { AddPropertyComponent } from './property/add-property/add-property.component';
 import { PropertyDetailComponent } from './property/property-detail/property-detail.component';
@@ -25,6 +25,9 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { Observable } from 'rxjs';
 import { FilterPipe } from 'src/app/Pipes/filter.pipe';
 import { SortPipe } from 'src/app/Pipes/sort.pipe';
+import { HttpErrorInterceptorService } from './Services/httperor-interceptor.service';
+import { DatePipe } from '@angular/common';
+import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -66,7 +69,14 @@ const appRoutes: Routes = [
 
   ],
 
-  providers: [HousingService, UserServiceService, AlertifyService,AuthService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi: true
+  },
+  DatePipe,
+    HousingService, UserServiceService, AlertifyService,AuthService, PropertyDetailResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

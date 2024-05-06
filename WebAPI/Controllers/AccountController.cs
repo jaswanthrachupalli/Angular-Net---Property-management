@@ -33,11 +33,15 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Login(LoginreqDto loginReq)
         {
             var user = await uow.userRepository.Authenticate(loginReq.UserName, loginReq.Password);
+            ApiError apiError = new ApiError();
 
 
             if (user == null)
             {
-                return Unauthorized("Invalid userid or password");
+                apiError.ErrorCode=Unauthorized().StatusCode;
+                apiError.ErrorMessage="Invalid user name or password";
+                apiError.ErrorDetails="This error appear when provided user id or password does not exists";
+                return Unauthorized(apiError); 
             }
 
             var loginRes = new LoginResDto();
@@ -50,10 +54,19 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Register(LoginreqDto loginreq)
         { 
 
-            if (await uow.userRepository.UserAlreadyExists(loginreq.UserName))
-            {
-                return BadRequest("User already exists, please try different user name");
-            }
+            ApiError apiError = new ApiError();
+
+            if(loginReq.UserName.IsEmpty() || loginReq.Password.IsEmpty()) {
+                    apiError.ErrorCode=BadRequest().StatusCode;
+                    apiError.ErrorMessage="User name or password can not be blank";                    
+                    return BadRequest(apiError);
+            }                    
+
+            if (await uow.UserRepository.UserAlreadyExists(loginReq.UserName)) {
+                apiError.ErrorCode=BadRequest().StatusCode;
+                apiError.ErrorMessage="User already exists, please try different user name";
+                return BadRequest(apiError);
+            }        
 
             uow.userRepository.Register(loginreq.UserName, loginreq.Password);
             await uow.SaveAsync();
