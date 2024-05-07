@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Dtos;
 using WebAPI.Errors;
+using WebAPI.Extensions;
 using WebAPI.interfaces;
 using WebAPI.Models;
 
@@ -56,13 +57,13 @@ namespace WebAPI.Controllers
 
             ApiError apiError = new ApiError();
 
-            if(loginReq.UserName.IsEmpty() || loginReq.Password.IsEmpty()) {
+            if(loginreq.UserName.IsEmpty() || loginreq.Password.IsEmpty()) {
                     apiError.ErrorCode=BadRequest().StatusCode;
                     apiError.ErrorMessage="User name or password can not be blank";                    
                     return BadRequest(apiError);
             }                    
 
-            if (await uow.UserRepository.UserAlreadyExists(loginReq.UserName)) {
+            if (await uow.userRepository.UserAlreadyExists(loginreq.UserName)) {
                 apiError.ErrorCode=BadRequest().StatusCode;
                 apiError.ErrorMessage="User already exists, please try different user name";
                 return BadRequest(apiError);
